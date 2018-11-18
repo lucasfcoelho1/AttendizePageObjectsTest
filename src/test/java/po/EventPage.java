@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package po;
 
 import java.time.Duration;
@@ -15,12 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- *
- * @author Coelho
- */
 public class EventPage extends AttendizeBasePage {
 
     @FindBy(xpath = "//*[@id=\"main\"]/div/div[2]/div/div[1]/div/div/a")
@@ -28,6 +21,11 @@ public class EventPage extends AttendizeBasePage {
     private WebElement createEventButton;
 
     WebElement title;
+    
+    Select select;
+    
+    @FindBy(xpath = "//*[@id=\"main\"]/div/div[4]/div[1]/div/div[3]/ul/li[2]/a")
+    WebElement manageEvent;
 
     @FindBy(xpath = "(.//*[normalize-space(text()) and normalize-space(.)='|'])[3]/following::div[9]")
     @CacheLookup
@@ -64,6 +62,21 @@ public class EventPage extends AttendizeBasePage {
     
     @FindBy(xpath = "/html/body/div[2]/form/div/div/div[3]/input")
     private WebElement saveEventButton;
+    
+    @FindBy(xpath = "/html/body/div[2]/form/div/div/div[2]/div/div/div[1]/div")
+    private WebElement titleError;
+    
+    @FindBy(xpath = "/html/body/div[2]/form/div/div/div[2]/div/div/div[2]/div[1]")
+    private WebElement descriptionError;
+    
+    @FindBy(xpath = "/html/body/div[2]/form/div/div/div[2]/div/div/div[3]/div[1]/div/div")
+    private WebElement startDateError;
+    
+    @FindBy(xpath = "/html/body/div[2]/form/div/div/div[2]/div/div/div[3]/div[2]/div/div")
+    private WebElement endDateError;
+    
+    @FindBy(xpath = "/html/body/div[2]/form/div/div/div[2]/div/div/div[5]/div[1]")
+    private WebElement venueError;
 
     public EventPage(WebDriver driver) {
         super(driver);
@@ -130,8 +143,44 @@ public class EventPage extends AttendizeBasePage {
     }
     
     public TicketsPage clickSaveEventButton(){
-        saveEventButton.click();
+        clickAwaiter(saveEventButton);
         return new TicketsPage(driver);
+    }
+    
+    public EventPage clickSaveError(){
+        clickAwaiter(saveEventButton);
+        return this;
+    }
+    
+    public String getTitleError(){
+        return titleError.getText();
+    }
+
+    public String getDescriptionError() {
+        return descriptionError.getText();
+    }
+
+    public String getStartDateError() {
+        return startDateError.getText();
+    }
+
+    public String getEndDateError() {
+        return endDateError.getText();
+    }
+
+    public String getVenueError() {
+        return venueError.getText();
+    }
+    
+    public EventPage changeComboboxTo(String value){
+        select = new Select(driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[3]/div[2]/div/select")));
+        select.selectByVisibleText(value);
+        return this;
+    }
+    
+    public EventPage manageEventClick(){
+        clickAwaiter(manageEvent);
+        return this;
     }
 
 }

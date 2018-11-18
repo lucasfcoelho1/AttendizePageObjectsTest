@@ -46,7 +46,7 @@ public class LoginPage extends AttendizeBasePage{
     }
 
     public DashboardPage clickLoginButton() {
-        login.click();
+        clickAwaiter(login);
         return new DashboardPage(driver);
     }
 

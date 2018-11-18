@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package po;
 
 import org.junit.Test;
@@ -10,11 +6,9 @@ import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-/**
- *
- * @author Coelho
- */
 public class AttendizeBasePage extends BasePage{
     
     @FindBy(tagName = "h1")
@@ -38,6 +32,12 @@ public class AttendizeBasePage extends BasePage{
     public void fillElement(WebElement element, String content) {
         element.click();
         element.sendKeys(content);
+    }
+    
+    public void clickAwaiter(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until( ExpectedConditions.elementToBeClickable(element) );
+        element.click();
     }
     
 }
