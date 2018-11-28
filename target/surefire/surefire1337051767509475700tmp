@@ -1,5 +1,5 @@
 #surefire
-#Thu Nov 08 18:35:50 BRST 2018
+#Sun Nov 18 02:28:03 BRST 2018
 enableAssertions=true
 testSuiteDefinitionTestSourceDirectory=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2\\src\\test\\java
 requestedTest=tests.LoginTest
@@ -40,6 +40,7 @@ includes0=**/tests/LoginTest.java
 failIfNoTests=true
 useManifestOnlyJar=true
 testClassesDirectory=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2\\target\\test-classes
+requestedTestMethod=testCT07RegistryAttendeeEntrance
 classPathUrl.19=C\:\\Users\\Coelho\\.m2\\repository\\com\\google\\guava\\guava\\23.6-jre\\guava-23.6-jre.jar
 classPathUrl.18=C\:\\Users\\Coelho\\.m2\\repository\\com\\google\\code\\gson\\gson\\2.8.2\\gson-2.8.2.jar
 classPathUrl.17=C\:\\Users\\Coelho\\.m2\\repository\\commons-logging\\commons-logging\\1.2\\commons-logging-1.2.jar

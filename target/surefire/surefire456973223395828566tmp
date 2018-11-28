@@ -1,12 +1,8 @@
 #surefire
-#Thu Nov 08 18:35:50 BRST 2018
-jpda.address=50961
+#Sun Nov 18 02:28:03 BRST 2018
 maven.ext.class.path=C\:\\Program Files\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
-file.encoding=UTF-8
-jpda.listen=true
-forkMode=once
 user.dir=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2
+file.encoding=UTF-8
 localRepository=C\:\\Users\\Coelho\\.m2\\repository
-test=tests.LoginTest
 basedir=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2
-maven.surefire.debug=-Xdebug -Xrunjdwp\:transport\=dt_socket,server\=n,address\=50961
+test=tests.LoginTest\#testCT07RegistryAttendeeEntrance

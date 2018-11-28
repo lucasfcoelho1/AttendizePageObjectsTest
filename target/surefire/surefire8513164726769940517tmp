@@ -1,5 +1,5 @@
 #surefire
-#Thu Nov 08 18:35:50 BRST 2018
+#Sun Nov 18 23:45:07 BRST 2018
 enableAssertions=true
 testSuiteDefinitionTestSourceDirectory=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2\\src\\test\\java
 requestedTest=tests.LoginTest

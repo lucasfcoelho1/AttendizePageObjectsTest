@@ -1,6 +1,6 @@
 #surefire
-#Thu Nov 08 18:35:50 BRST 2018
-jpda.address=50961
+#Sun Nov 18 23:45:07 BRST 2018
+jpda.address=53604
 maven.ext.class.path=C\:\\Program Files\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
 file.encoding=UTF-8
 jpda.listen=true
@@ -9,4 +9,4 @@ user.dir=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2
 localRepository=C\:\\Users\\Coelho\\.m2\\repository
 test=tests.LoginTest
 basedir=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2
-maven.surefire.debug=-Xdebug -Xrunjdwp\:transport\=dt_socket,server\=n,address\=50961
+maven.surefire.debug=-Xdebug -Xrunjdwp\:transport\=dt_socket,server\=n,address\=53604

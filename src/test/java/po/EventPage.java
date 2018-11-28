@@ -77,6 +77,8 @@ public class EventPage extends AttendizeBasePage {
     
     @FindBy(xpath = "/html/body/div[2]/form/div/div/div[2]/div/div/div[5]/div[1]")
     private WebElement venueError;
+    
+    
 
     public EventPage(WebDriver driver) {
         super(driver);

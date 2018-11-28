@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -11,10 +15,15 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import po.*;
+import po.DashboardPage;
+import po.LoginPage;
+import po.TicketsPage;
 
-public class LoginTest {
-    
+/**
+ *
+ * @author Coelho
+ */
+public class ManageEventTest {
     private WebDriver driver;
     
     @BeforeClass
@@ -39,19 +48,7 @@ public class LoginTest {
     }
     
     @Test
-    public void testCT01InvalidLogin() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
-        
-        loginPage
-                .setEmailTextField("teste@teste.com")
-                .setPasswordPasswordField("123")
-                .clickLoginButton();
-        
-        assertEquals("Your username/password combination was incorrect", loginPage.getErrorMessage());
-    }
-    
-    @Test
-    public void testCT02ValidLogin() throws InterruptedException {
+    public void testCT05AddAPriceToEvent() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         
         DashboardPage dashboardPage = loginPage
@@ -60,9 +57,24 @@ public class LoginTest {
                 .clickLoginButton();
         
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
+        
+        TicketsPage ticketsPage = dashboardPage
+                .getMenu()
+                .goToEventPage()
+                .changeComboboxTo("Creation Date")
+                .manageEventClick()
+                .getMenu()
+                .goToTicketsPage();
+        
+        ticketsPage.clickCreateTicket()
+                .fillTitleTicket("Inteira")
+                .fillPriceTicket("20")
+                .fillQuantityTicket("100")
+                .clickMoreOptions()
+                .changeMaximumTickets("3")
+                .clickSaveTicket();
+        
+        assertEquals("Successfully Created Ticket", ticketsPage.getConfirmMessage());
     }
     
-    
-
-
 }

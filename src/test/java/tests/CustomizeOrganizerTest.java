@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -11,9 +15,15 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import po.*;
+import po.DashboardPage;
+import po.LoginPage;
+import po.PublicEventPage;
 
-public class LoginTest {
+/**
+ *
+ * @author Coelho
+ */
+public class CustomizeOrganizerTest {
     
     private WebDriver driver;
     
@@ -39,19 +49,7 @@ public class LoginTest {
     }
     
     @Test
-    public void testCT01InvalidLogin() throws InterruptedException {
-        LoginPage loginPage = new LoginPage(driver);
-        
-        loginPage
-                .setEmailTextField("teste@teste.com")
-                .setPasswordPasswordField("123")
-                .clickLoginButton();
-        
-        assertEquals("Your username/password combination was incorrect", loginPage.getErrorMessage());
-    }
-    
-    @Test
-    public void testCT02ValidLogin() throws InterruptedException {
+    public void testCT10CustomizeOrganiser() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         
         DashboardPage dashboardPage = loginPage
@@ -60,9 +58,22 @@ public class LoginTest {
                 .clickLoginButton();
         
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
+        
+        PublicEventPage publicEventPage = dashboardPage
+                .getMenu()
+                .goToCustomizePage()
+                .fillTaxId("1")
+                .fillTaxName("Imposto")
+                .fillTaxValue("10")
+                .clickSaveOrganiser()
+                .getMenu()
+                .goToEventPage()
+                .manageEventClick()
+                .getMenu()
+                .goToPublicEventPage();
+        
+        Thread.currentThread().sleep(2000);
+        assertEquals(("+€2.00 Tax"), publicEventPage.getTaxText());
     }
     
-    
-
-
 }

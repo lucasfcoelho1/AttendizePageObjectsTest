@@ -20,6 +20,19 @@ public class Menu extends BasePage{
     @FindBy(xpath = "//*[@id=\"nav_event\"]/li[2]/a")
     private WebElement ticket;
     
+    @FindBy(xpath = "//*[@id=\"nav_event\"]/li[4]/a")
+    private WebElement attendees;
+    
+    @FindBy(xpath = "//*[@id=\"nav_event\"]/li[1]")
+    private WebElement checkin;
+    
+    @FindBy(xpath = "//*[@id=\"nav\"]/li[3]/a")
+    private WebElement cutomize;
+    
+    
+    @FindBy(xpath = "//*[@id=\"header\"]/div[2]/ul[1]/li[2]/a")
+    private WebElement publicEvent;
+    
     public Menu(WebDriver driver) {
         super(driver);
     }
@@ -34,7 +47,26 @@ public class Menu extends BasePage{
         return new TicketsPage(driver);
     }
     
+    public AttendeesPage goToAttendeesPage(){
+        clickMenuOption(attendees);
+        return new AttendeesPage(driver);
+    }
     
+    public CheckinPage goToCheckinPage() throws InterruptedException{
+        Thread.currentThread().sleep(2000);
+        checkin.click();
+        return new CheckinPage(driver);
+    }
+    
+    public CustomizePage goToCustomizePage(){
+        clickMenuOption(cutomize);
+        return new CustomizePage(driver);
+    }
+    
+    public PublicEventPage goToPublicEventPage(){
+        clickMenuOption(publicEvent);
+        return new PublicEventPage(driver);
+    }
     
     private void clickMenuOption(WebElement menuOption) {
         //menu hides the options -- responsive page
