@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import po.CustomizePage;
 import po.DashboardPage;
 import po.LoginPage;
 import po.PublicEventPage;
@@ -36,7 +37,7 @@ public class CustomizeOrganizerTest {
     @Before
     public void before() {
         ChromeOptions chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("headless");
+        chromeOptions.addArguments("headless");
         chromeOptions.addArguments("window-size=1200x600");
         chromeOptions.addArguments("lang=en-US");
         chromeOptions.addArguments("start-maximized");
@@ -47,6 +48,30 @@ public class CustomizeOrganizerTest {
     @After
     public void after() {
         driver.close();
+    }
+    
+    @Test
+    public void testCT09ChangeColorOrganiserPage() throws InterruptedException{
+        LoginPage loginPage = new LoginPage(driver);
+        
+        DashboardPage dashboardPage = loginPage
+                .setEmailTextField("teste@teste.com")
+                .setPasswordPasswordField("utfpr")
+                .clickLoginButton();
+        
+        assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
+        
+        CustomizePage customizePage = dashboardPage
+                .getMenu()
+                .goToCustomizePage();
+        
+        customizePage
+                .showOtherCustomizationOptions()
+                .changeColorEvent("#2c66ce")
+                .clickSaveOptions()
+               .viewOrganizerPage();
+        
+        assertEquals("rgba(44, 102, 206, 1)", customizePage.checkColorTitle());
     }
     
     @Test
