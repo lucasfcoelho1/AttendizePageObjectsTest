@@ -1,8 +1,0 @@
-#surefire
-#Fri Nov 16 08:21:28 BRST 2018
-maven.ext.class.path=C\:\\Program Files\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
-user.dir=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2
-file.encoding=UTF-8
-localRepository=C\:\\Users\\Coelho\\.m2\\repository
-basedir=C\:\\Users\\Coelho\\Documents\\NetBeansProjects\\AttendizeParte2
-test=tests.LoginTest

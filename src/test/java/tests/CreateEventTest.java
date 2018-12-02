@@ -6,6 +6,9 @@
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Test;
@@ -63,10 +66,10 @@ public class CreateEventTest {
                 .getMenu()
                 .goToEventPage()
                 .createEvent()
-                .fillEventTitle("UTFWARE 2018")
+                .fillEventTitle("UTFWARE 2018 ID:"+ dashboardPage.GenerateEventId())
                 .fillEventDescription("Evento de tecnologia")
                 .fillEventStartDate("20", "09", "2018", "18", "40")
-                .fillEventEndDate("25", "11", "2018", "22", "30")
+                .fillEventEndDate("25", "11", "2019", "22", "30")
                 .fillVenueName("Conélio Procópio - PR, Brasil")
                 .clickSaveEventButton();
         
@@ -74,7 +77,7 @@ public class CreateEventTest {
     }
     
     @Test
-    public void testCT04InvalidCreateEvent() {
+    public void testCT04InvalidCreateEvent() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         
         DashboardPage dashboardPage = loginPage

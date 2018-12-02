@@ -34,7 +34,7 @@ public class ManageEventTest {
     @Before
     public void before() {
         ChromeOptions chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("headless");
+        chromeOptions.addArguments("headless");
         chromeOptions.addArguments("window-size=1200x600");
         chromeOptions.addArguments("lang=en-US");
         chromeOptions.addArguments("start-maximized");
@@ -61,8 +61,21 @@ public class ManageEventTest {
         TicketsPage ticketsPage = dashboardPage
                 .getMenu()
                 .goToEventPage()
+                .createEvent()
+                .fillEventTitle("UTFWARE 2018 ID:"+ dashboardPage.GenerateEventId())
+                .fillEventDescription("Evento de tecnologia")
+                .fillEventStartDate("20", "09", "2018", "18", "40")
+                .fillEventEndDate("25", "11", "2019", "22", "30")
+                .fillVenueName("Conélio Procópio - PR, Brasil")
+                .clickSaveEventButton();
+        
+        ticketsPage = dashboardPage
+                .getMenu()
+                .goBackToDashboardPage()
+                .getMenu()
+                .goToEventPage()
                 .changeComboboxTo("Creation Date")
-                .manageEventClick()
+                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
                 .getMenu()
                 .goToTicketsPage();
         
@@ -78,3 +91,5 @@ public class ManageEventTest {
     }
     
 }
+
+

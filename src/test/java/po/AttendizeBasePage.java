@@ -1,6 +1,7 @@
 
 package po;
 
+import java.util.GregorianCalendar;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +15,9 @@ public class AttendizeBasePage extends BasePage{
     @FindBy(tagName = "h1")
     WebElement title;
     
-    Menu menu; 
+    Menu menu;
+    
+    long eventId;
     
     public AttendizeBasePage(WebDriver driver) {
         super(driver);
@@ -38,6 +41,16 @@ public class AttendizeBasePage extends BasePage{
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until( ExpectedConditions.elementToBeClickable(element) );
         element.click();
+    }
+    
+   
+    public long GenerateEventId(){
+        eventId = GregorianCalendar.getInstance().getTimeInMillis();
+        return eventId;
+    }
+    
+    public long GetEventId(){
+        return eventId;
     }
     
 }

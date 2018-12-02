@@ -19,6 +19,7 @@ import po.AttendeesPage;
 import po.CheckinPage;
 import po.DashboardPage;
 import po.LoginPage;
+import po.TicketsPage;
 
 /**
  *
@@ -45,7 +46,7 @@ public class ManageAttendeeTest {
     
     @After
     public void after() {
-        driver.close();
+        //driver.close();
     }
     
     
@@ -60,10 +61,36 @@ public class ManageAttendeeTest {
         
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
         
-        AttendeesPage attendeesPage = dashboardPage
+        TicketsPage ticketsPage = dashboardPage
                 .getMenu()
                 .goToEventPage()
-                .manageEventClick()
+                .createEvent()
+                .fillEventTitle("UTFWARE 2018 ID:"+ dashboardPage.GenerateEventId())
+                .fillEventDescription("Evento de tecnologia")
+                .fillEventStartDate("20", "09", "2018", "18", "40")
+                .fillEventEndDate("25", "11", "2019", "22", "30")
+                .fillVenueName("Conélio Procópio - PR, Brasil")
+                .clickSaveEventButton();
+        
+        ticketsPage = dashboardPage
+                .getMenu()
+                .goBackToDashboardPage()
+                .getMenu()
+                .goToEventPage()
+                .changeComboboxTo("Creation Date")
+                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
+                .getMenu()
+                .goToTicketsPage();
+        
+        ticketsPage.clickCreateTicket()
+                .fillTitleTicket("Inteira")
+                .fillPriceTicket("20")
+                .fillQuantityTicket("100")
+                .clickMoreOptions()
+                .changeMaximumTickets("3")
+                .clickSaveTicket();
+        
+        AttendeesPage attendeesPage = dashboardPage
                 .getMenu()
                 .goToAttendeesPage()
                 .clickInviteAttendee()
@@ -86,16 +113,56 @@ public class ManageAttendeeTest {
         
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
         
-        CheckinPage checkinPage = dashboardPage
+        TicketsPage ticketsPage = dashboardPage
+                .getMenu()
+                .goToEventPage()
+                .createEvent()
+                .fillEventTitle("UTFWARE 2018 ID:"+ dashboardPage.GenerateEventId())
+                .fillEventDescription("Evento de tecnologia")
+                .fillEventStartDate("20", "09", "2018", "18", "40")
+                .fillEventEndDate("25", "11", "2019", "22", "30")
+                .fillVenueName("Conélio Procópio - PR, Brasil")
+                .clickSaveEventButton();
+        
+        ticketsPage = dashboardPage
+                .getMenu()
+                .goBackToDashboardPage()
                 .getMenu()
                 .goToEventPage()
                 .changeComboboxTo("Creation Date")
-                .manageEventClick()
+                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
+                .getMenu()
+                .goToTicketsPage();
+        
+        ticketsPage.clickCreateTicket()
+                .fillTitleTicket("Inteira")
+                .fillPriceTicket("20")
+                .fillQuantityTicket("100")
+                .clickMoreOptions()
+                .changeMaximumTickets("3")
+                .clickSaveTicket();
+        
+        AttendeesPage attendeesPage = ticketsPage
+                .getMenu()
+                .goToAttendeesPage()
+                .clickInviteAttendee()
+                .fillFirstName("Lucas")
+                .fillLastName("Coelho")
+                .fillEmail("lucasfcoelho@gmail.com")
+                .clickSaveButton();
+        
+        CheckinPage checkinPage = attendeesPage
+                .getMenu()
+                .goBackToDashboardPage()
+                .getMenu()
+                .goToEventPage()
+                .changeComboboxTo("Creation Date")
+                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
                 .getMenu()
                 .goToCheckinPage()
                 .clickRegistryAttendeeEntrance();
         
-        assertEquals("#E6FFE7", checkinPage.checkColor());
+        assertEquals("rgba(230, 255, 231, 1)", checkinPage.checkColor());
         
     }
     

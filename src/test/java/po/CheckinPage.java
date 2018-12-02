@@ -9,8 +9,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class CheckinPage extends AttendizeBasePage{
     
-    @FindBy(xpath = "//*[@id=\"attendee_list\"]/li[1]")
+    @FindBy(xpath = "//*[@id=\"attendee_list\"]/li")
     private WebElement attendee;
+    
+    @FindBy(xpath = "//*[@id=\"attendee_list\"]/li/a")
+    private WebElement button;
     
     public CheckinPage(WebDriver driver) {
         super(driver);
@@ -21,8 +24,9 @@ public class CheckinPage extends AttendizeBasePage{
         return this;
     }
     
-    public String checkColor(){
-        return attendee.getCssValue("background-clor");
+    public String checkColor() throws InterruptedException{
+        Thread.sleep(2000);
+        return attendee.getCssValue("background-color");
     }
     
 }

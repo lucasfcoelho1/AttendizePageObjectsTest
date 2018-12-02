@@ -174,14 +174,17 @@ public class EventPage extends AttendizeBasePage {
         return venueError.getText();
     }
     
-    public EventPage changeComboboxTo(String value){
+    public EventPage changeComboboxTo(String value) throws InterruptedException{
+        Thread.sleep(2000);
         select = new Select(driver.findElement(By.xpath("//*[@id=\"main\"]/div/div[3]/div[2]/div/select")));
+        Thread.sleep(2000);
         select.selectByVisibleText(value);
         return this;
     }
     
-    public EventPage manageEventClick(){
-        clickAwaiter(manageEvent);
+    public EventPage manageEventClick(String eventTitle){
+        WebElement link = driver.findElement(By.linkText(eventTitle));
+        clickAwaiter(link);
         return this;
     }
 

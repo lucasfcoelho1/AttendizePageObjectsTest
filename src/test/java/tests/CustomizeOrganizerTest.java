@@ -18,6 +18,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import po.DashboardPage;
 import po.LoginPage;
 import po.PublicEventPage;
+import po.TicketsPage;
 
 /**
  *
@@ -59,7 +60,38 @@ public class CustomizeOrganizerTest {
         
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
         
-        PublicEventPage publicEventPage = dashboardPage
+        TicketsPage ticketsPage = dashboardPage
+                .getMenu()
+                .goToEventPage()
+                .createEvent()
+                .fillEventTitle("UTFWARE 2018 ID:"+ dashboardPage.GenerateEventId())
+                .fillEventDescription("Evento de tecnologia")
+                .fillEventStartDate("20", "09", "2018", "18", "40")
+                .fillEventEndDate("25", "11", "2019", "22", "30")
+                .fillVenueName("Conélio Procópio - PR, Brasil")
+                .clickSaveEventButton();
+        
+        ticketsPage = dashboardPage
+                .getMenu()
+                .goBackToDashboardPage()
+                .getMenu()
+                .goToEventPage()
+                .changeComboboxTo("Creation Date")
+                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
+                .getMenu()
+                .goToTicketsPage();
+        
+        ticketsPage.clickCreateTicket()
+                .fillTitleTicket("Inteira")
+                .fillPriceTicket("20")
+                .fillQuantityTicket("100")
+                .clickMoreOptions()
+                .changeMaximumTickets("3")
+                .clickSaveTicket();
+        
+        PublicEventPage publicEventPage = ticketsPage
+                .getMenu()
+                .goBackToDashboardPage()
                 .getMenu()
                 .goToCustomizePage()
                 .fillTaxId("1")
@@ -68,12 +100,13 @@ public class CustomizeOrganizerTest {
                 .clickSaveOrganiser()
                 .getMenu()
                 .goToEventPage()
-                .manageEventClick()
+                .changeComboboxTo("Creation Date")
+                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
                 .getMenu()
                 .goToPublicEventPage();
         
         Thread.currentThread().sleep(2000);
-        assertEquals(("+€2.00 Tax"), publicEventPage.getTaxText());
+        assertEquals("(+€2.00 Imposto)", publicEventPage.getTaxText());
     }
     
 }
