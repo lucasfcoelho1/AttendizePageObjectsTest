@@ -86,6 +86,15 @@ public class Menu extends BasePage{
         return new CheckinPage(driver);
     }
     
+    public SurveysPage goToSurveyPage() throws InterruptedException{
+        Thread.currentThread().sleep(2000);
+        List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"nav_event\"]/li[2]/a"));
+        if(elements.size() > 1)
+            clickMenuOption(elements.get(1));
+        Thread.currentThread().sleep(2000);
+        return new SurveysPage(driver);
+    }
+    
     public CustomizePage goToCustomizePage() throws InterruptedException{
         Thread.currentThread().sleep(2000);
         clickMenuOption(cutomize);

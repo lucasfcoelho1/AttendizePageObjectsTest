@@ -38,7 +38,7 @@ public class CreateEventTest {
     @Before
     public void before() {
         ChromeOptions chromeOptions = new ChromeOptions();
-//        chromeOptions.addArguments("headless");
+        chromeOptions.addArguments("headless");
         chromeOptions.addArguments("window-size=1200x600");
         chromeOptions.addArguments("lang=en-US");
         chromeOptions.addArguments("start-maximized");
