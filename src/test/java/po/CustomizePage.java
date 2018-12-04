@@ -2,6 +2,7 @@ package po;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,6 +31,9 @@ public class CustomizePage extends AttendizeBasePage {
     @FindBy(xpath = "//*[@id=\"page_header_bg_color\"]")
     private WebElement colorEvent;
 
+    @FindBy(id = "charge_yes")
+    private WebElement yesRadioButton;
+
     @FindBy(xpath = "//*[@id=\"OrganiserPageDesign\"]/form/div[2]/input")
     private WebElement saveChangesButton;
 
@@ -53,8 +57,16 @@ public class CustomizePage extends AttendizeBasePage {
         Thread.sleep(2000);
         return this;
     }
-    
-    public String checkColorTitle(){
+
+    public CustomizePage clickYesToTaxEvents() throws InterruptedException {
+        WebElement yes = driver.findElement(By.name("charge_tax"));
+        Thread.sleep(2000);
+        yes.click();
+        Thread.sleep(2000);
+        return this;
+    }
+
+    public String checkColorTitle() {
         String url = driver.getCurrentUrl();
         return colorTitle.getCssValue("background-color");
     }

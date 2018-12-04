@@ -73,6 +73,7 @@ public class CreateEventTest {
                 .fillVenueName("Conélio Procópio - PR, Brasil")
                 .clickSaveEventButton();
         
+        Thread.sleep(2000);
         assertEquals("No Tickets Yet", ticketsPage.getNoTicketMessage());
     }
     

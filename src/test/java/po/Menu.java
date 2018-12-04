@@ -26,15 +26,6 @@ public class Menu extends BasePage{
     @FindBy(xpath = "//*[@id=\"nav_event\"]/li[4]/a")
     private WebElement attendees;
     
-//    @FindBy(css = "//*[@id=\"nav_event\"]/li[1]")
-//    private WebElement checkin;
-    
-//    @FindBy(linkText = "Check-In")
-//    private WebElement checkin;
-    
-//    @FindBy(xpath = "//*[@id=\"nav_event\"]/li[1]/a")
-//    private WebElement checkin;
-    
     @FindBy(xpath = "//*[@id=\"nav\"]/li[3]/a")
     private WebElement cutomize;
     

@@ -89,7 +89,8 @@ public class EventPage extends AttendizeBasePage {
         return this;
     }
 
-    public EventPage fillEventTitle(String eventTitle) {
+    public EventPage fillEventTitle(String eventTitle) throws InterruptedException {
+        Thread.sleep(2000);
         fillElement(title, eventTitle);
         return this;
     }

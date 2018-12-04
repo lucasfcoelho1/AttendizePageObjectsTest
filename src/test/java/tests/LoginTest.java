@@ -61,8 +61,4 @@ public class LoginTest {
         
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
     }
-    
-    
-
-
 }

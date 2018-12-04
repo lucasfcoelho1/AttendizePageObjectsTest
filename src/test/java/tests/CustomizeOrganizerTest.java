@@ -26,14 +26,14 @@ import po.TicketsPage;
  * @author Coelho
  */
 public class CustomizeOrganizerTest {
-    
+
     private WebDriver driver;
-    
+
     @BeforeClass
     public static void beforeClass() {
         WebDriverManager.chromedriver().setup();
     }
-    
+
     @Before
     public void before() {
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -44,68 +44,68 @@ public class CustomizeOrganizerTest {
         driver = new ChromeDriver(chromeOptions);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
-    
+
     @After
     public void after() {
         driver.close();
     }
-    
+
     @Test
-    public void testCT09ChangeColorOrganiserPage() throws InterruptedException{
+    public void testCT09ChangeColorOrganiserPage() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        
+
         DashboardPage dashboardPage = loginPage
                 .setEmailTextField("teste@teste.com")
                 .setPasswordPasswordField("utfpr")
                 .clickLoginButton();
-        
+
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
-        
+
         CustomizePage customizePage = dashboardPage
                 .getMenu()
                 .goToCustomizePage();
-        
+
         customizePage
                 .showOtherCustomizationOptions()
                 .changeColorEvent("#2c66ce")
                 .clickSaveOptions()
-               .viewOrganizerPage();
-        
+                .viewOrganizerPage();
+
         assertEquals("rgba(44, 102, 206, 1)", customizePage.checkColorTitle());
     }
-    
+
     @Test
     public void testCT10CustomizeOrganiser() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
-        
+
         DashboardPage dashboardPage = loginPage
                 .setEmailTextField("teste@teste.com")
                 .setPasswordPasswordField("utfpr")
                 .clickLoginButton();
-        
+
         assertEquals("UTFPR Dashboard", dashboardPage.getTitle());
-        
+
         TicketsPage ticketsPage = dashboardPage
                 .getMenu()
                 .goToEventPage()
                 .createEvent()
-                .fillEventTitle("UTFWARE 2018 ID:"+ dashboardPage.GenerateEventId())
+                .fillEventTitle("UTFWARE 2018 ID:" + dashboardPage.GenerateEventId())
                 .fillEventDescription("Evento de tecnologia")
                 .fillEventStartDate("20", "09", "2018", "18", "40")
                 .fillEventEndDate("25", "11", "2019", "22", "30")
                 .fillVenueName("Conélio Procópio - PR, Brasil")
                 .clickSaveEventButton();
-        
+
         ticketsPage = dashboardPage
                 .getMenu()
                 .goBackToDashboardPage()
                 .getMenu()
                 .goToEventPage()
                 .changeComboboxTo("Creation Date")
-                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
+                .manageEventClick("UTFWARE 2018 ID:" + dashboardPage.GetEventId())
                 .getMenu()
                 .goToTicketsPage();
-        
+
         ticketsPage.clickCreateTicket()
                 .fillTitleTicket("Inteira")
                 .fillPriceTicket("20")
@@ -113,12 +113,13 @@ public class CustomizeOrganizerTest {
                 .clickMoreOptions()
                 .changeMaximumTickets("3")
                 .clickSaveTicket();
-        
+
         PublicEventPage publicEventPage = ticketsPage
                 .getMenu()
                 .goBackToDashboardPage()
                 .getMenu()
                 .goToCustomizePage()
+                .clickYesToTaxEvents()
                 .fillTaxId("1")
                 .fillTaxName("Imposto")
                 .fillTaxValue("10")
@@ -126,12 +127,12 @@ public class CustomizeOrganizerTest {
                 .getMenu()
                 .goToEventPage()
                 .changeComboboxTo("Creation Date")
-                .manageEventClick("UTFWARE 2018 ID:"+ dashboardPage.GetEventId())
+                .manageEventClick("UTFWARE 2018 ID:" + dashboardPage.GetEventId())
                 .getMenu()
                 .goToPublicEventPage();
-        
+
         Thread.currentThread().sleep(2000);
         assertEquals("(+€2.00 Imposto)", publicEventPage.getTaxText());
     }
-    
+
 }
